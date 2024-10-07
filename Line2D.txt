@@ -1,0 +1,77 @@
+public class Line2D {
+    private Point2D p1; // 線分の始点
+    private Point2D p2; // 線分の終点
+    // コントラスタ
+
+    // public static void main(String[] args) {
+    // Point2D Pointp1 = new Point2D(10.0, 20.0);
+    // Point2D Pointp2 = new Point2D(20.0, 30.0);
+    // Line2D line = new Line2D(Pointp1, Pointp2);
+    // line.print();
+    // System.out.println("線分の長さ: " + line.length());
+    // }
+
+    public Line2D(Point2D p1, Point2D p2) {
+        this.p1 = p1;// クラスのフィールド変数の変数 p1 をローカル変数として参照されるように
+        this.p2 = p2;// クラスのフィールド変数の変数 p2 をローカル変数として参照されるように
+    }
+
+    public Point2D getP1() {
+        return this.p1;// 始点の値を得るためのメソッド
+    }
+
+    public void setP1(Point2D p1) {
+        this.p1 = p1;// 得た始点の座標を設定するためのメソッド
+    }
+
+    public Point2D getP2() {
+        return this.p2;// 終点の値を得るためのメソッド
+    }
+
+    public void setP2(Point2D p2) {
+        this.p2 = p2;// 得た終点の座標を設定するためのメソッド
+    }
+
+    public void print() {
+        System.out.println("(" + this.p1.getX() + ", " + this.p1.getY() + ")" + "-" + "(" + this.p2.getX() + ", "
+                + this.p2.getY() + ")");
+    }
+    // （始点のx座標，始点のy座標）ー （終点のx座標，終点のy座標）と表示するようにする
+
+    public double length() {
+        double x1 = this.p1.getX();
+        double x2 = this.p2.getX();
+        double y1 = this.p1.getY();
+        double y2 = this.p2.getY();// x座標，y座標をそれぞれ変数変換
+
+        double deltaX = x2 - x1;
+        double deltaY = y2 - y1;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);// Math.sprtは（）内の平方根を計算する．double型で返す
+    }
+
+    public Line2D clone() {
+        return new Line2D(new Point2D(p1.getX(), p1.getY()), new Point2D(p2.getX(), p2.getY()));
+    }
+
+    public boolean equals(Line2D l2) {
+        if (this == l2) {
+            return true;
+        }
+        // 1つ目の条件をチェックする
+        if (this.p1.equals(l2.p1)) {
+            // 1つ目の条件が満たされた場合、2つ目の条件をチェックする
+            if (this.p2.equals(l2.p2)) {
+                return true;
+            }
+        } else if (this.p1.equals(l2.p2)) {
+            // 1つ目の条件が満たされない場合、2つ目の条件をチェックする
+            // この場合はp1がl2のp2と等しいことをチェックする
+            if (this.p2.equals(l2.p1)) {
+                return true;
+            }
+        }
+
+        // 条件がどれにも満たさない場合
+        return false;
+    }
+}
